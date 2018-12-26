@@ -11,7 +11,7 @@ Class CoordUtil
 	// view matrix setup mostly pulled from gutawer's code
 	static Vector3 WorldToScreen( Vector3 vect, Vector3 eye, double pitch, double yaw, double roll, double vfov )
 	{
-		double ar = Screen.getWidth()/double(Screen.getHeight());
+		double ar = Screen.GetAspectRatio();
 		double fovr = (ar>=1.3)?1.333333:ar;
 		double fov = 2*atan(tan(clamp(vfov,5,170)*0.5)/fovr);
 		float pr = level.pixelstretch;
