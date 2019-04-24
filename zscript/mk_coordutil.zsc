@@ -69,4 +69,62 @@ Class CoordUtil
 		}
 		else return ((screenpos.x+1)*Screen.getWidth(),(-screenpos.y+1)*Screen.getHeight())*0.5, (screenpos.z<=1.0);
 	}
+
+	// In Tim Sweeney's own words: "transform by a pitch-yaw-roll rotation"
+	static Vector3, Vector3, Vector3 GetUnAxes( double pitch, double yaw, double roll )
+	{
+		Vector3 x = (1,0,0), y = (0,-1,0), z = (0,0,1);	// y inverted for left-handed result
+		Vector3 a, b, c;
+		// yaw
+		a = (cos(yaw),sin(yaw),0);
+		b = (-sin(yaw),cos(yaw),0);
+		c = (0,0,1);
+		x = (x dot a, x dot b, x dot c);
+		y = (y dot a, y dot b, y dot c);
+		z = (z dot a, z dot b, z dot c);
+		// pitch
+		a = (cos(pitch),0,sin(pitch));
+		b = (0,1,0);
+		c = (-sin(pitch),0,cos(pitch));
+		x = (x dot a, x dot b, x dot c);
+		y = (y dot a, y dot b, y dot c);
+		z = (z dot a, z dot b, z dot c);
+		// roll
+		a = (1,0,0);
+		b = (0,cos(roll),-sin(roll));
+		c = (0,sin(roll),cos(roll));
+		x = (x dot a, x dot b, x dot c);
+		y = (y dot a, y dot b, y dot c);
+		z = (z dot a, z dot b, z dot c);
+		return x, y, z;
+	}
+
+	// In Tim Sweeney's own words: "detransform by a pitch-yaw-roll rotation"
+	static Vector3, Vector3, Vector3 GetAxes( double pitch, double yaw, double roll )
+	{
+		Vector3 x = (1,0,0), y = (0,-1,0), z = (0,0,1);	// y inverted for left-handed result
+		Vector3 a, b, c;
+		// inverse roll
+		a = (1,0,0);
+		b = (0,cos(roll),sin(roll));
+		c = (0,-sin(roll),cos(roll));
+		x = (x dot a, x dot b, x dot c);
+		y = (y dot a, y dot b, y dot c);
+		z = (z dot a, z dot b, z dot c);
+		// inverse pitch
+		a = (cos(pitch),0,-sin(pitch));
+		b = (0,1,0);
+		c = (sin(pitch),0,cos(pitch));
+		x = (x dot a, x dot b, x dot c);
+		y = (y dot a, y dot b, y dot c);
+		z = (z dot a, z dot b, z dot c);
+		// inverse yaw
+		a = (cos(yaw),-sin(yaw),0);
+		b = (sin(yaw),cos(yaw),0);
+		c = (0,0,1);
+		x = (x dot a, x dot b, x dot c);
+		y = (y dot a, y dot b, y dot c);
+		z = (z dot a, z dot b, z dot c);
+		return x, y, z;
+	}
 }

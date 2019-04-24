@@ -106,7 +106,8 @@ Class Matrix4
 		return r;
 	}
 
-	// UE-like axes from rotation
+	// [deprecated] UE-like axes from rotation
+	// proper implementation moved to CoordUtil
 	static Vector3, Vector3, Vector3 getaxes( double pitch, double yaw, double roll )
 	{
 		Vector3 x = (1,0,0), y = (0,-1,0), z = (0,0,1);	// y inverted for left-handed result
