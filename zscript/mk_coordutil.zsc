@@ -75,7 +75,9 @@ Class CoordUtil
 	{
 		Vector3 x = (1,0,0), y = (0,-1,0), z = (0,0,1);	// y inverted for left-handed result
 		Vector3 a, b, c;
-		pitch = -pitch;	// pitch in gzdoom works in reverse compared to UE
+		// pitch and roll in gzdoom work in reverse compared to UE
+		pitch = -pitch;
+		roll = -roll;
 		// yaw
 		a = (cos(yaw),sin(yaw),0);
 		b = (-sin(yaw),cos(yaw),0);
@@ -105,7 +107,9 @@ Class CoordUtil
 	{
 		Vector3 x = (1,0,0), y = (0,-1,0), z = (0,0,1);	// y inverted for left-handed result
 		Vector3 a, b, c;
-		pitch = -pitch;	// pitch in gzdoom works in reverse compared to UE
+		// pitch and roll in gzdoom work in reverse compared to UE
+		pitch = -pitch;
+		roll = -roll;
 		// inverse roll
 		a = (1,0,0);
 		b = (0,cos(roll),sin(roll));
